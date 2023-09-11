@@ -3,8 +3,8 @@
 <?php create_table('rubrica_telefonica', 'contatti', ['id int primary key auto_increment', 'numero varchar(10) not null unique', 'nome varchar(50) not null', 'cognome varchar(50)', 'email varchar(50)']); ?>
 <?php $contatti = select_all('rubrica_telefonica', 'contatti'); ?>
 <?php $filtrati = []; ?>
-<?php if (isset($_GET['ricerca'])): ?>
-<?php $filtrati = select_by_anything('rubrica_telefonica', 'contatti', $_GET['ricerca']); ?>
+<?php if (isset($_POST['ricerca'])): ?>
+<?php $filtrati = select_by_anything('rubrica_telefonica', 'contatti', $_POST['ricerca']); ?>
 <?php endif; ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -23,7 +23,7 @@
                     <h1><i class="bi bi-journal-bookmark-fill"></i>Rubrica Telefonica</h1>
                 </div>
                 <div class="col-3 text-right d-inline">
-                    <form name="cerca" action="index.php" method="get">
+                    <form name="cerca" action="index.php" method="post">
                         <div class="input-group">
                             <input type="text" class="form-control" id="ricerca" name="ricerca" placeholder="Cerca" />
                             <button type="submit">
@@ -48,8 +48,12 @@
                                 <span class="mx-2"><i class="bi bi-telephone-fill mx-2"></i><?php echo $contatti[$i][0] ?></span>
                                 <span class="mx-2"><i class="bi bi-person-fill mx-2"></i><?php echo $contatti[$i][1] . ' ' . $contatti[$i][2] ?></span>
                                 <span class="mx-2"><i class="bi bi-envelope-at-fill mx-2"></i><?php echo $contatti[$i][3] ?></span>
-                                <button type="button" class="btn btn-warning btn-sm mx-2" onclick="location.href='form-edit.php?numero=<?php echo $contatti[$i][0] ?>'">Modifica</button>
-                                <button type="button" class="btn btn-danger btn-sm mx-2" onclick="location.href='delete.php?numero=<?php echo $contatti[$i][0] ?>'">Elimina</button>
+                                <button type="button" class="btn btn-warning btn-sm mx-2" onclick="location.href='form-edit.php?numero=<?php echo $contatti[$i][0] ?>'">
+                                    <i class="bi bi-pencil-square me-2"></i>Modifica
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm mx-2" onclick="location.href='delete.php?numero=<?php echo $contatti[$i][0] ?>'">
+                                    <i class="bi bi-trash3-fill me-2"></i>Elimina
+                                </button>
                             </div>
                         </li>
                     <?php endfor; ?>
@@ -63,8 +67,12 @@
                                 <span class="mx-2"><i class="bi bi-telephone-fill mx-2"></i><?php echo $filtrati[$i][0] ?></span>
                                 <span class="mx-2"><i class="bi bi-person-fill mx-2"></i><?php echo $filtrati[$i][1] . ' ' . $filtrati[$i][2] ?></span>
                                 <span class="mx-2"><i class="bi bi-envelope-at-fill mx-2"></i><?php echo $filtrati[$i][3] ?></span>
-                                <button type="button" class="btn btn-warning btn-sm mx-2" onclick="location.href='form-edit.php?numero=<?php echo $filtrati[$i][0] ?>'">Modifica</button>
-                                <button type="button" class="btn btn-danger btn-sm mx-2" onclick="location.href='delete.php?numero=<?php echo $filtrati[$i][0] ?>'">Elimina</button>
+                                <button type="button" class="btn btn-warning btn-sm mx-2" onclick="location.href='form-edit.php?numero=<?php echo $filtrati[$i][0] ?>'">
+                                    <i class="bi bi-pencil-square me-2"></i>Modifica
+                                </button>
+                                <button type="button" class="btn btn-danger btn-sm mx-2" onclick="location.href='delete.php?numero=<?php echo $filtrati[$i][0] ?>'">
+                                    <i class="bi bi-trash3-fill me-2"></i>Elimina
+                                </button>
                             </div>
                         </li>
                     <?php endfor; ?>
@@ -87,7 +95,9 @@
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" inputmode="email" class="form-control" maxlength="50" />
                         <div class="text-center mt-2">
-                            <button type="submit" class="btn btn-success" id="salva">Salva</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check-square-fill me-2"></i>Salva
+                            </button>
                         </div>
                     </form>
                 </div>
