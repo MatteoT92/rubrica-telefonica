@@ -1,5 +1,5 @@
 <?php include 'database.php'; ?>
-<?php $numero = $_GET['numero']; ?>
+<?php $numero = trim($_GET['numero']); ?>
 <!DOCTYPE html>
 <html lang="it">
     <head>
@@ -8,7 +8,6 @@
         <title>Rubrica Telefonica</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="container">
@@ -16,13 +15,15 @@
                 <div class="col-4 offset-4">
                     <?php if (delete('rubrica_telefonica', 'contatti', $numero)): ?>
                     <div class="alert alert-success text-center" role="alert">
-                        <i class="bi bi-emoji-smile mx-2"></i>
-                        Contatto eliminato con successo!
+                        <i class="bi bi-emoji-smile mx-2 h1"></i>
+                        <br />
+                        <span class="h1">Contatto eliminato con successo!</span>
                     </div>
                     <?php else: ?>
                     <div class="alert alert-danger text-center" role="alert">
-                        <i class="bi bi-emoji-frown mx-2"></i>
-                        Errore! Contatto non eliminato.
+                        <i class="bi bi-emoji-frown mx-2 h1"></i>
+                        <br />
+                        <span class="h1">Errore! Contatto non eliminato.</span>
                     </div>
                     <?php endif; ?>
                     <div class="text-center">
