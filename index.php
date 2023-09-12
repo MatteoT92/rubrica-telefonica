@@ -2,9 +2,11 @@
 <?php create_db('rubrica_telefonica'); ?>
 <?php create_table('rubrica_telefonica', 'contatti', ['id int primary key auto_increment', 'numero varchar(10) not null unique', 'nome varchar(50) not null', 'cognome varchar(50)', 'email varchar(50)']); ?>
 <?php $contatti = select_all('rubrica_telefonica', 'contatti'); ?>
+<?php $cerca = ""; ?>
 <?php $filtrati = []; ?>
 <?php if (isset($_POST['ricerca'])): ?>
-<?php $filtrati = select_by_anything('rubrica_telefonica', 'contatti', trim($_POST['ricerca'])); ?>
+<?php $cerca = trim($_POST['ricerca']); ?>
+<?php $filtrati = select_by_anything('rubrica_telefonica', 'contatti', trim($cerca)); ?>
 <?php endif; ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -38,7 +40,7 @@
                 <div class="col">
                     <div class="row rounded-5 shadow h-75 overflow-auto" style="border: 10px solid #7c3f00;">
                         <ul class="list-group">
-                        <?php if (count($contatti) > 0 && count($filtrati) == 0): ?>
+                        <?php if (count($contatti) > 0 && count($filtrati) == 0 && strlen($cerca) == 0): ?>
                         <?php for ($i = 0; $i < count($contatti); $i++): ?>
                             <li class="list-group-item">
                                 <div class="col-1 text-left d-inline-flex">
@@ -76,6 +78,8 @@
                                 </div>
                             </li>
                         <?php endfor; ?>
+                        <?php elseif (count($contatti) > 0 && count($filtrati) == 0 && strlen($cerca) > 0): ?>
+                            <li class="list-group-item">Nessun contatto trovato</li>
                         <?php else: ?>
                             <li class="list-group-item">Nessun contatto presente</li>
                         <?php endif; ?>
