@@ -18,7 +18,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center min-vh-100">
                 <div class="col-4 offset-4">
                     <?php if (edit('rubrica_telefonica', 'contatti', $numero, $dati_aggiornati)): ?>
                     <div class="alert alert-success text-center" role="alert">

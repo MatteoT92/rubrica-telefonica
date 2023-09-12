@@ -17,7 +17,7 @@ $email = $_POST['email'];
     </head>
     <body>
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center min-vh-100">
                 <div class="col-4 offset-4">
                     <?php if (insert('rubrica_telefonica', 'contatti', ['numero', 'nome', 'cognome', 'email'], [$numero, $nome, $cognome, $email])): ?>
                     <div class="alert alert-success text-center" role="alert">

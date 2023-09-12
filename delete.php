@@ -12,7 +12,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center min-vh-100">
                 <div class="col-4 offset-4">
                     <?php if (delete('rubrica_telefonica', 'contatti', $numero)): ?>
                     <div class="alert alert-success text-center" role="alert">

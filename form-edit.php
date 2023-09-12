@@ -18,7 +18,7 @@ $dati_contatto = select_by_number('rubrica_telefonica', 'contatti', $numero);
             <div class="row text-center d-inline-flex" onclick="location.href='index.php'">
                 <h1><i class="bi bi-journal-bookmark-fill"></i>Rubrica Telefonica</h1>
             </div>
-            <div class="row">
+            <div class="row align-items-center min-vh-100">
                 <div class="col-4 offset-4">
                     <div class="text-center">
                         <h2><i class="bi bi-pencil-square me-2"></i>Modifica Contatto</h2><br>
