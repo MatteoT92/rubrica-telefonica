@@ -28,7 +28,22 @@ Scarica il progetto
 Copiare la cartella "rubrica-telefonica" in XAMPP
 
 ```bash
-  cd /C/xampp/htdocs
+  mv rubrica-telefonica /C/xampp/htdocs
+```
+
+Creare un file .env
+
+```bash
+  cd /C/xampp/htdocs/rubrica-telefonica
+  touch .env
+```
+
+Aprire il file .env appena creato e inserisci le seguenti chiavi riguardanti i propri dati per la connessione a MySQL
+
+```bash
+  HOST = INSERIRE QUI IL PROPRIO HOST (es. localhost)
+  USER = INSERIRE QUI IL NOME DELLO USER CON CUI CONNETTERSI A MySQL (es. root)
+  PASSWORD = INSERIRE QUI LA PASSWORD DELLO USER CON CUI CONNETTERSI A MySQL
 ```
 
 Infine, accedi al pannello di controllo di XAMPP e clicca Start su Apache e MySQL
