@@ -1,8 +1,9 @@
+<?php include 'env.php'; ?>
 <?php
 
-$host = "localhost";
-$user = "root";
-$password = "matteot92";
+$host = host(); // recupera l'host dal file env.php
+$user = user(); // recupera l'username database MySQL dal file env.php
+$password = password(); // recupera la password utente database MySQL dal file env.php
 
 function create_db($name) {
     $conn = new mysqli($GLOBALS['host'], $GLOBALS['user'], $GLOBALS['password']);

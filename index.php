@@ -1,12 +1,12 @@
 <?php include 'database.php'; ?>
-<?php create_db('rubrica_telefonica'); ?>
-<?php create_table('rubrica_telefonica', 'contatti', ['id int primary key auto_increment', 'numero varchar(10) not null unique', 'nome varchar(50) not null', 'cognome varchar(50)', 'email varchar(50)']); ?>
-<?php $contatti = select_all('rubrica_telefonica', 'contatti'); ?>
+<?php create_db('rubrica_telefonica'); // crea il database se non esiste ?>
+<?php create_table('rubrica_telefonica', 'contatti', ['id int primary key auto_increment', 'numero varchar(10) not null unique', 'nome varchar(50) not null', 'cognome varchar(50)', 'email varchar(50)']); // crea la tabella se non esiste ?>
+<?php $contatti = select_all('rubrica_telefonica', 'contatti'); // seleziona tutti i contatti registrati in rubrica ?>
 <?php $cerca = ""; ?>
 <?php $filtrati = []; ?>
-<?php if (isset($_POST['ricerca'])): ?>
-<?php $cerca = trim($_POST['ricerca']); ?>
-<?php $filtrati = select_by_anything('rubrica_telefonica', 'contatti', trim($cerca)); ?>
+<?php if (isset($_POST['ricerca'])): // verifica che l'utente abbia digitato qualcosa nel campo di ricerca ?>
+<?php $cerca = trim($_POST['ricerca']); // salva il valore digitato ?>
+<?php $filtrati = select_by_anything('rubrica_telefonica', 'contatti', trim($cerca)); // seleziona i contatti dal database in base al valore digitato ?>
 <?php endif; ?>
 <!DOCTYPE html>
 <html lang="it">
@@ -40,7 +40,7 @@
                 <div class="col">
                     <div class="row rounded-5 shadow h-75 overflow-auto" style="border: 10px solid #7c3f00;">
                         <ul class="list-group">
-                        <?php if (count($contatti) > 0 && count($filtrati) == 0 && strlen($cerca) == 0): ?>
+                        <?php if (count($contatti) > 0 && count($filtrati) == 0 && strlen($cerca) == 0): // se non ci sono ricerche da parte dell'utente ?>
                         <?php for ($i = 0; $i < count($contatti); $i++): ?>
                             <li class="list-group-item">
                                 <div class="col-1 text-left d-inline-flex">
@@ -59,7 +59,7 @@
                                 </div>
                             </li>
                         <?php endfor; ?>
-                        <?php elseif (count($contatti) > 0 && count($filtrati) > 0): ?>
+                        <?php elseif (count($contatti) > 0 && count($filtrati) > 0): // se ci sono ricerche da parte dell'utente che hanno prodotto dei risultati ?>
                         <?php for ($i = 0; $i < count($filtrati); $i++): ?>
                             <li class="list-group-item">
                                 <div class="col-1 text-left d-inline-flex">
@@ -78,7 +78,7 @@
                                 </div>
                             </li>
                         <?php endfor; ?>
-                        <?php elseif (count($contatti) > 0 && count($filtrati) == 0 && strlen($cerca) > 0): ?>
+                        <?php elseif (count($contatti) > 0 && count($filtrati) == 0 && strlen($cerca) > 0): // se ci sono ricerche da parte dell'utente che non hanno prodotto dei risultati ?>
                             <li class="list-group-item">Nessun contatto trovato</li>
                         <?php else: ?>
                             <li class="list-group-item">Nessun contatto presente</li>

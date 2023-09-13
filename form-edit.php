@@ -1,7 +1,7 @@
 <?php include 'database.php'; ?>
 <?php
 $numero = trim($_GET['numero']);
-$dati_contatto = select_by_number('rubrica_telefonica', 'contatti', $numero);
+$dati_contatto = select_by_number('rubrica_telefonica', 'contatti', $numero); // seleziona i dati del contatto in base al numero telefonico
 ?>
 <!DOCTYPE html>
 <html lang="it">
