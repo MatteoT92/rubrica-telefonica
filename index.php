@@ -1,6 +1,6 @@
 <?php include 'database.php'; ?>
 <?php create_db('rubrica_telefonica'); // crea il database se non esiste ?>
-<?php create_table('rubrica_telefonica', 'contatti', ['id int primary key auto_increment', 'numero varchar(10) not null unique', 'nome varchar(50) not null', 'cognome varchar(50)', 'email varchar(50)']); // crea la tabella se non esiste ?>
+<?php create_table('rubrica_telefonica', 'contatti'); // crea la tabella se non esiste ?>
 <?php $contatti = select_all('rubrica_telefonica', 'contatti'); // seleziona tutti i contatti registrati in rubrica ?>
 <?php $cerca = ""; ?>
 <?php $filtrati = []; ?>

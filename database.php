@@ -20,17 +20,18 @@ function create_db($name) {
     }
 }
 
-function create_table($db, $name, $columns) {
+function create_table($db, $name) {
     $conn = new mysqli($GLOBALS['host'], $GLOBALS['user'], $GLOBALS['password'], $db);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     } else {
-        $sql = "CREATE TABLE IF NOT EXISTS $name (";
-        for ($i = 0; $i < count($columns); $i++) { // per ogni colonna
-            $sql .= "$columns[$i], "; // aggiungo la colonna alla query
-        }
-        $sql = substr($sql, 0, -2); // rimuovo dalla query l'ultimo spazio e virgola
-        $sql .= ");"; // aggiungo alla fine della query la parentesi e il punto e virgola
+        $sql = "CREATE TABLE IF NOT EXISTS $name (
+                id int primary key auto_increment,
+                numero varchar(10) not null unique,
+                nome varchar(50) not null,
+                cognome varchar(50),
+                email varchar(50)
+                );";
         try {
             $conn->query($sql);
             $conn->close();
@@ -40,24 +41,17 @@ function create_table($db, $name, $columns) {
     }
 }
 
-function insert($db, $table, $columns, $values) {
+function insert($db, $table, $values) {
     $conn = new mysqli($GLOBALS['host'], $GLOBALS['user'], $GLOBALS['password'], $db);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     } else {
-        $sql = "INSERT INTO $table (";
-        for ($i = 0; $i < count($columns); $i++) { // per ogni colonna
-            $sql .= "$columns[$i], "; // aggiungo la colonna alla query
-        }
-        $sql = substr($sql, 0, -2); // rimuovo dalla query l'ultimo spazio e virgola
-        $sql .= ") VALUES ("; // chiudo la parentesi delle colonne e aggiungo la parentesi per inserire i valori
-        for ($i = 0; $i < count($values); $i++) { // per ogni valore
-            $sql .= "'$values[$i]', "; // aggiungo il valore alla query
-        }
-        $sql = substr($sql, 0, -2); // rimuovo dalla query l'ultimo spazio e virgola
-        $sql .= ");"; // aggiungo alla fine della query la parentesi e il punto e virgola
+        $sql = "INSERT INTO $table (numero, nome, cognome, email) VALUES (?, ?, ?, ?);";
         try {
-            $conn->query($sql);
+            $statement = $conn->prepare($sql); // prepara la query creando lo statement
+            $statement->bind_param("ssss", $values[0], $values[1], $values[2], $values[3]); // effettua il binding dei parametri
+            $statement->execute(); // esegue la query
+            $statement->close(); // chiude lo statement
             $conn->close();
             return true; // ritorna true se l'inserimento è andato a buon fine
         } catch (mysqli_sql_exception $e) {

@@ -18,7 +18,7 @@ $email = trim($_POST['email']);
         <div class="container">
             <div class="row align-items-center min-vh-100">
                 <div class="col-4 offset-4">
-                    <?php if (insert('rubrica_telefonica', 'contatti', ['numero', 'nome', 'cognome', 'email'], [$numero, $nome, $cognome, $email])): ?>
+                    <?php if (insert('rubrica_telefonica', 'contatti', [$numero, $nome, $cognome, $email])): ?>
                     <div class="alert alert-success text-center" role="alert">
                         <i class="bi bi-emoji-smile mx-2 h1"></i>
                         <br />
